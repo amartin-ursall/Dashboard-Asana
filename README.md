@@ -1,6 +1,6 @@
 # ZenDash: Intelligent Asana Dashboard
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/amartin-ursall/Dashboard-Asana)
 
 ZenDash is a visually stunning and intelligent dashboard that transforms your Asana workspace into a clear, actionable command center. It provides powerful analytics, insightful AI-driven conversations, and a beautiful, intuitive interface to help teams achieve peak productivity and project clarity. The application securely integrates with the Asana API via a Cloudflare Worker acting as a Backend-For-Frontend (BFF), ensuring all sensitive credentials remain server-side. Key modules include a comprehensive Dashboard with interactive charts and KPIs, detailed Task and Project views with advanced filtering, and an integrated AI Chat assistant (powered by Cloudflare Agents) for natural language queries on your Asana data. The entire experience is wrapped in a meticulously crafted, responsive UI built with shadcn/ui and Tailwind CSS, prioritizing both aesthetic excellence and user productivity.
 
@@ -108,7 +108,7 @@ This project is designed for seamless deployment to Cloudflare.
 
 Alternatively, you can deploy directly from your GitHub repository:
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/amartin-ursall/Dashboard-Asana)
 
 ## Project Structure
 
