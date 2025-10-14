@@ -4,7 +4,7 @@
  */
 import type { AppController } from './app-controller';
 import type { ChatAgent } from './agent';
-export interface Env {
+export interface Env {swd
     CF_AI_BASE_URL: string;
     CF_AI_API_KEY: string;
     SERPAPI_KEY: string;

@@ -3,6 +3,9 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle, FolderSearch } from "lucide-react";
+import { EmptyState } from "@/components/common/EmptyState";
+import { PageContainer } from "@/components/common/PageContainer";
+import { motion } from "framer-motion";
 function ProjectsLoadingSkeleton() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -26,9 +29,9 @@ export function ProjectsPage() {
         {isError && (
           <Alert variant="destructive">
             <AlertTriangle className="h-4 w-4" />
-            <AlertTitle>Error fetching projects</AlertTitle>
+            <AlertTitle>Error al cargar los proyectos</AlertTitle>
             <AlertDescription>
-              {error instanceof Error ? error.message : "An unknown error occurred."}
+              {error instanceof Error ? error.message : "Ocurrió un error desconocido."}
             </AlertDescription>
           </Alert>
         )}
@@ -36,18 +39,23 @@ export function ProjectsPage() {
           <>
             {projects.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {projects.map((project) => (
-                  <ProjectCard key={project.gid} project={project} />
+                {projects.map((project, index) => (
+                  <motion.div
+                    key={project.gid}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                  >
+                    <ProjectCard project={project} />
+                  </motion.div>
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16 border-2 border-dashed rounded-lg">
-                <FolderSearch className="mx-auto h-12 w-12 text-muted-foreground" />
-                <h3 className="mt-4 text-lg font-medium">No projects found</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  There are no projects in the selected workspace.
-                </p>
-              </div>
+              <EmptyState
+                icon={FolderSearch}
+                title="No se encontraron proyectos"
+                description="No hay proyectos en el espacio de trabajo seleccionado."
+              />
             )}
           </>
         )}

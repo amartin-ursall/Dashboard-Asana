@@ -11,14 +11,14 @@ export function SettingsPage() {
         <div className="max-w-2xl mx-auto">
           <Card>
             <CardHeader>
-              <CardTitle>Appearance</CardTitle>
+              <CardTitle>Apariencia</CardTitle>
               <CardDescription>
-                Customize the look and feel of the application.
+                Personaliza la apariencia de la aplicación.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <Label>Theme</Label>
+                <Label>Tema</Label>
                 <RadioGroup
                   value={theme}
                   onValueChange={(value) => setTheme(value as 'light' | 'dark' | 'system')}
@@ -31,7 +31,7 @@ export function SettingsPage() {
                       className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                     >
                       <Sun className="h-6 w-6 mb-2" />
-                      Light
+                      Claro
                     </Label>
                   </div>
                   <div>
@@ -41,7 +41,7 @@ export function SettingsPage() {
                       className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                     >
                       <Moon className="h-6 w-6 mb-2" />
-                      Dark
+                      Oscuro
                     </Label>
                   </div>
                   <div>
@@ -51,7 +51,7 @@ export function SettingsPage() {
                       className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                     >
                       <Laptop className="h-6 w-6 mb-2" />
-                      System
+                      Sistema
                     </Label>
                   </div>
                 </RadioGroup>

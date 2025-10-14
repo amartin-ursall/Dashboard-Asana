@@ -35,9 +35,9 @@ export function ReportsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 lg:py-12">
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>Error fetching report data</AlertTitle>
+          <AlertTitle>Error al cargar los datos del reporte</AlertTitle>
           <AlertDescription>
-            {error instanceof Error ? error.message : "An unknown error occurred."}
+            {error instanceof Error ? error.message : "Ocurrió un error desconocido."}
           </AlertDescription>
         </Alert>
       </div>
@@ -48,9 +48,9 @@ export function ReportsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 lg:py-12">
         <div className="text-center py-16 border-2 border-dashed rounded-lg">
           <BarChart3 className="mx-auto h-12 w-12 text-muted-foreground" />
-          <h3 className="mt-4 text-lg font-medium">Not enough data for reports</h3>
+          <h3 className="mt-4 text-lg font-medium">No hay suficientes datos para generar reportes</h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            Once you have more tasks in this workspace, reports will be generated here.
+            Una vez que tengas más tareas en este espacio de trabajo, los reportes se generarán aquí.
           </p>
         </div>
       </div>
@@ -61,20 +61,20 @@ export function ReportsPage() {
       <div className="py-8 md:py-10 lg:py-12">
         <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
           <ReportCard
-            title="Task Completion Trend"
-            description="Completed tasks over the last 30 days."
+            title="Tendencia de Finalización de Tareas"
+            description="Tareas completadas en los últimos 30 días."
           >
             <CompletionTrendChart tasks={tasks} />
           </ReportCard>
           <ReportCard
-            title="Project Distribution"
-            description="How tasks are distributed across projects."
+            title="Distribución de Proyectos"
+            description="Cómo se distribuyen las tareas entre los proyectos."
           >
             <ProjectDistributionChart tasks={tasks} />
           </ReportCard>
           <ReportCard
-            title="Team Workload"
-            description="Open tasks assigned to each team member."
+            title="Carga de Trabajo del Equipo"
+            description="Tareas abiertas asignadas a cada miembro del equipo."
           >
             <TeamWorkloadChart tasks={tasks} />
           </ReportCard>

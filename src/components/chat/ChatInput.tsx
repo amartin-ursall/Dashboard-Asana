@@ -29,7 +29,7 @@ export function ChatInput({ input, setInput, onSubmit, isLoading }: ChatInputPro
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Ask about your tasks, projects, or team workload..."
+        placeholder="Pregunta sobre tus tareas, proyectos o carga de trabajo del equipo..."
         className="w-full pr-16 py-3 resize-none max-h-48"
         rows={1}
         disabled={isLoading}
@@ -45,7 +45,7 @@ export function ChatInput({ input, setInput, onSubmit, isLoading }: ChatInputPro
         ) : (
           <Send className="h-4 w-4" />
         )}
-        <span className="sr-only">Send message</span>
+        <span className="sr-only">Enviar mensaje</span>
       </Button>
     </form>
   );

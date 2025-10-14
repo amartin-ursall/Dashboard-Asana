@@ -41,7 +41,7 @@ export function AuthCallbackPage() {
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="flex flex-col items-center gap-4">
         <Loader2 className="w-12 h-12 animate-spin text-primary" />
-        <p className="text-muted-foreground">Authenticating with Asana...</p>
+        <p className="text-muted-foreground">Autenticando con Asana...</p>
       </div>
     </div>
   );

@@ -18,15 +18,15 @@ export function LogoutConfirmationDialog({ open, onOpenChange, onConfirm }: Logo
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to log out?</AlertDialogTitle>
+          <AlertDialogTitle>¿Estás seguro de que quieres cerrar sesión?</AlertDialogTitle>
           <AlertDialogDescription>
-            You will be returned to the login page and your current session will be terminated.
+            Serás redirigido a la página de inicio de sesión y tu sesión actual será terminada.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction onClick={onConfirm} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-            Log Out
+            Cerrar Sesión
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

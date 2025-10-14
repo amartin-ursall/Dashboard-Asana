@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { useAuthStore, UserProfile } from '@/stores/auth.store';
 import { useWorkspaceStore } from '@/stores/workspace.store';
+import { useUIStore } from '@/stores/ui.store';
 import { useAsanaWorkspaces } from '@/hooks/useAsanaApi';
+import { ChevronRight, PanelLeftClose, PanelLeft } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,6 +34,21 @@ const getPageTitle = (pathname: string): string => {
   }
   return title;
 };
+
+const getBreadcrumbs = (pathname: string): Array<{ label: string; href: string }> => {
+  if (pathname === '/') return [{ label: 'Dashboard', href: '/' }];
+
+  const pathParts = pathname.substring(1).split('/').filter(Boolean);
+  const breadcrumbs = [{ label: 'Dashboard', href: '/' }];
+
+  pathParts.forEach((part, index) => {
+    const label = part.charAt(0).toUpperCase() + part.substring(1);
+    const href = '/' + pathParts.slice(0, index + 1).join('/');
+    breadcrumbs.push({ label, href });
+  });
+
+  return breadcrumbs;
+};
 const getInitials = (name: string = ''): string => {
   return name
     .split(' ')
@@ -41,14 +58,12 @@ const getInitials = (name: string = ''): string => {
 };
 function WorkspaceSelector() {
   const { data: workspaceData, isLoading } = useAsanaWorkspaces();
-  const { workspaces, selectedWorkspaceGid, setWorkspaces, setSelectedWorkspaceGid } = useWorkspaceStore(
-    (state) => ({
-      workspaces: state.workspaces,
-      selectedWorkspaceGid: state.selectedWorkspaceGid,
-      setWorkspaces: state.setWorkspaces,
-      setSelectedWorkspaceGid: state.setSelectedWorkspaceGid,
-    })
-  );
+
+  // FIX: Use individual selectors to avoid getSnapshot caching issues
+  const workspaces = useWorkspaceStore((state) => state.workspaces);
+  const selectedWorkspaceGid = useWorkspaceStore((state) => state.selectedWorkspaceGid);
+  const setWorkspaces = useWorkspaceStore((state) => state.setWorkspaces);
+  const setSelectedWorkspaceGid = useWorkspaceStore((state) => state.setSelectedWorkspaceGid);
   useEffect(() => {
     if (workspaceData?.data) {
       setWorkspaces(workspaceData.data);
@@ -123,14 +138,64 @@ function UserNav({ user, onLogout }: { user: UserProfile; onLogout: () => void }
 export function Header() {
   const location = useLocation();
   const pageTitle = getPageTitle(location.pathname);
+  const breadcrumbs = getBreadcrumbs(location.pathname);
   const user = useAuthStore(s => s.user);
   const logout = useAuthStore(s => s.logout);
+  const sidebarCollapsed = useUIStore(s => s.sidebarCollapsed);
+  const toggleSidebar = useUIStore(s => s.toggleSidebar);
+
+  // Import mobile menu dynamically to avoid circular dependencies
+  const MobileMenu = React.lazy(() => import('./Sidebar').then(m => ({ default: m.MobileMenuButton })));
+
   return (
-    <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 backdrop-blur-sm px-4 md:px-6">
-      <h1 className="text-xl font-semibold">{pageTitle}</h1>
-      <div className="ml-auto flex items-center gap-4">
-        <WorkspaceSelector />
-        {user && <UserNav user={user} onLogout={logout} />}
+    <header className="sticky top-0 z-10 border-b bg-background/80 backdrop-blur-sm px-4 md:px-6">
+      <div className="flex h-16 items-center gap-4">
+        {/* Mobile Menu */}
+        <React.Suspense fallback={null}>
+          <MobileMenu />
+        </React.Suspense>
+
+        {/* Desktop Sidebar Toggle */}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleSidebar}
+          className="hidden md:flex"
+          aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+        >
+          {sidebarCollapsed ? (
+            <PanelLeft className="h-5 w-5" />
+          ) : (
+            <PanelLeftClose className="h-5 w-5" />
+          )}
+        </Button>
+
+        <div className="flex flex-col justify-center min-w-0">
+          <h1 className="text-xl font-semibold truncate">{pageTitle}</h1>
+          {breadcrumbs.length > 1 && (
+            <nav className="flex items-center gap-1 text-sm text-muted-foreground">
+              {breadcrumbs.map((crumb, index) => (
+                <React.Fragment key={crumb.href}>
+                  {index > 0 && <ChevronRight className="h-3 w-3" />}
+                  {index === breadcrumbs.length - 1 ? (
+                    <span className="font-medium text-foreground truncate">{crumb.label}</span>
+                  ) : (
+                    <Link
+                      to={crumb.href}
+                      className="hover:text-foreground transition-colors truncate"
+                    >
+                      {crumb.label}
+                    </Link>
+                  )}
+                </React.Fragment>
+              ))}
+            </nav>
+          )}
+        </div>
+        <div className="ml-auto flex items-center gap-4">
+          <WorkspaceSelector />
+          {user && <UserNav user={user} onLogout={logout} />}
+        </div>
       </div>
     </header>
   );

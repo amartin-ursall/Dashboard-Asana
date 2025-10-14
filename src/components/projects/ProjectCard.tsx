@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink, User, Calendar } from "lucide-react";
 import { format, parseISO } from 'date-fns';
 import { Link } from "react-router-dom";
+import { useQueryClient } from '@tanstack/react-query';
 interface ProjectCardProps {
   project: AsanaProjectDetails;
 }
@@ -34,9 +35,28 @@ const getStatusColor = (color: string) => {
 }
 export function ProjectCard({ project }: ProjectCardProps) {
   const projectColorClass = project.color ? asanaColors[project.color] || 'bg-gray-300' : 'bg-gray-300';
+  const queryClient = useQueryClient();
+
+  const handleMouseEnter = () => {
+    // Prefetch project details on hover for better UX
+    queryClient.prefetchQuery({
+      queryKey: ['project', project.gid],
+      queryFn: async () => {
+        // This would be the actual API call for project details
+        // For now, we're just prefetching the basic project data
+        return project;
+      },
+      staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
+    });
+  };
+
   return (
-    <Link to={`/projects/${project.gid}`} className="block group">
-      <Card className="flex flex-col h-full group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-200">
+    <Link
+      to={`/projects/${project.gid}`}
+      className="block group"
+      onMouseEnter={handleMouseEnter}
+    >
+      <Card className="flex flex-col h-full group-hover:shadow-xl group-hover:-translate-y-1 group-hover:scale-[1.02] transition-all duration-200">
         <CardHeader className="pb-4">
           <div className={`h-2 w-12 rounded-full ${projectColorClass} mb-3`}></div>
           <CardTitle className="text-lg font-semibold leading-tight">

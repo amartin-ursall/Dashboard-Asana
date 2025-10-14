@@ -24,16 +24,16 @@ export function HomePage() {
             </linearGradient>
             </defs>
           </svg>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tighter">ZenDash</h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tighter">Dashboard Asana</h1>
         </div>
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          Your Asana workspace, transformed into a clear, actionable command center.
+          Tu espacio de trabajo de Asana, transformado en un centro de comando claro y accionable.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto text-left text-muted-foreground">
-            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Powerful Analytics</div>
-            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Project Insights</div>
-            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-primary" /> AI Chat Assistant</div>
-            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Stunning Visuals</div>
+            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Análisis Potentes</div>
+            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Insights de Proyectos</div>
+            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Asistente IA de Chat</div>
+            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-primary" /> Visuales Impactantes</div>
         </div>
         <div className="pt-4">
           <Button
@@ -41,12 +41,12 @@ export function HomePage() {
             onClick={handleLogin}
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-1"
           >
-            Connect with Asana
+            Conectar con Asana
           </Button>
         </div>
       </motion.div>
       <footer className="absolute bottom-8 text-center text-muted-foreground/80 text-sm">
-        <p>Built with ��️ at Cloudflare</p>
+        <p>By Ursall</p>
       </footer>
     </div>
   );

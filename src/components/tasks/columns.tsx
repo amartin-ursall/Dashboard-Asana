@@ -52,7 +52,7 @@ export const createTaskColumns = (options: CreateTaskColumnsOptions = {}): Colum
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Task Name
+            Nombre de Tarea
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         )
@@ -71,10 +71,10 @@ export const createTaskColumns = (options: CreateTaskColumnsOptions = {}): Colum
     },
     {
       accessorKey: "assignee",
-      header: "Assignee",
+      header: "Asignado a",
       cell: ({ row }) => {
         const assignee = row.original.assignee;
-        if (!assignee) return <span className="text-muted-foreground">Unassigned</span>;
+        if (!assignee) return <span className="text-muted-foreground">Sin asignar</span>;
         return (
           <div className="flex items-center gap-2">
             <Avatar className="h-6 w-6">
@@ -94,7 +94,7 @@ export const createTaskColumns = (options: CreateTaskColumnsOptions = {}): Colum
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Due Date
+            Fecha de Vencimiento
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         )
@@ -107,7 +107,7 @@ export const createTaskColumns = (options: CreateTaskColumnsOptions = {}): Colum
     },
     {
       accessorKey: "projects",
-      header: "Projects",
+      header: "Proyectos",
       cell: ({ row }) => {
         const projects = row.original.projects;
         if (!projects || projects.length === 0) return <span className="text-muted-foreground">—</span>;
@@ -121,10 +121,10 @@ export const createTaskColumns = (options: CreateTaskColumnsOptions = {}): Colum
     },
     {
       accessorKey: "completed",
-      header: "Status",
+      header: "Estado",
       cell: ({ row }) => {
         const isCompleted = row.getValue("completed");
-        return isCompleted ? <Badge variant="default" className="bg-green-500/20 text-green-700 hover:bg-green-500/30 dark:bg-green-500/10 dark:text-green-400">Completed</Badge> : <Badge variant="outline">Open</Badge>;
+        return isCompleted ? <Badge variant="default" className="bg-green-500/20 text-green-700 hover:bg-green-500/30 dark:bg-green-500/10 dark:text-green-400">Completada</Badge> : <Badge variant="outline">Abierta</Badge>;
       },
     },
   ];

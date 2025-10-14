@@ -5,6 +5,8 @@ import { DataTable } from "@/components/tasks/DataTable";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle, Inbox } from "lucide-react";
+import { EmptyState } from "@/components/common/EmptyState";
+import { PageContainer } from "@/components/common/PageContainer";
 function TasksLoadingSkeleton() {
   return (
     <div className="space-y-4">
@@ -38,9 +40,9 @@ export function TasksPage() {
         {isError && (
           <Alert variant="destructive">
             <AlertTriangle className="h-4 w-4" />
-            <AlertTitle>Error fetching tasks</AlertTitle>
+            <AlertTitle>Error al cargar las tareas</AlertTitle>
             <AlertDescription>
-              {error instanceof Error ? error.message : "An unknown error occurred."}
+              {error instanceof Error ? error.message : "Ocurrió un error desconocido."}
             </AlertDescription>
           </Alert>
         )}
@@ -49,13 +51,11 @@ export function TasksPage() {
             {tasks.length > 0 ? (
               <DataTable columns={columns} data={tasks} />
             ) : (
-              <div className="text-center py-16 border-2 border-dashed rounded-lg">
-                <Inbox className="mx-auto h-12 w-12 text-muted-foreground" />
-                <h3 className="mt-4 text-lg font-medium">No tasks found</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  It looks like you don't have any tasks assigned to you in this workspace.
-                </p>
-              </div>
+              <EmptyState
+                icon={Inbox}
+                title="No se encontraron tareas"
+                description="Parece que no tienes tareas asignadas en este espacio de trabajo."
+              />
             )}
           </>
         )}

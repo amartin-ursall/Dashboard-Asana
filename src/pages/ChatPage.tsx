@@ -66,8 +66,8 @@ export function ChatPage() {
         {chatState.messages.length === 0 && !chatState.isProcessing && (
           <div className="text-center text-muted-foreground pt-16">
             <Bot className="w-16 h-16 mx-auto mb-4 opacity-50" />
-            <h2 className="text-2xl font-semibold">ZenDash AI Assistant</h2>
-            <p className="mt-2">Ask me anything about your Asana data.</p>
+            <h2 className="text-2xl font-semibold">Asistente IA de ZenDash</h2>
+            <p className="mt-2">Pregúntame cualquier cosa sobre tus datos de Asana.</p>
           </div>
         )}
         {chatState.messages.map((msg) => (
@@ -93,9 +93,9 @@ export function ChatPage() {
           />
           <Alert className="mt-4 text-xs text-muted-foreground">
             <Info className="h-4 w-4" />
-            <AlertTitle>Heads up!</AlertTitle>
+            <AlertTitle>¡Aviso!</AlertTitle>
             <AlertDescription>
-              AI capabilities have a shared usage limit across all users. Responses may be slower during peak times.
+              Las capacidades de IA tienen un límite de uso compartido entre todos los usuarios. Las respuestas pueden ser más lentas durante horas pico.
             </AlertDescription>
           </Alert>
         </div>

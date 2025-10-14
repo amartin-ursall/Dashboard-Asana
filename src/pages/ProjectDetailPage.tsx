@@ -49,15 +49,15 @@ export function ProjectDetailPage() {
     const inProgressTasks = currentTasks.filter(t => !t.completed);
     const overdueTasks = currentTasks.filter(t => !t.completed && t.due_on && new Date(t.due_on) < new Date());
     const kpis = [
-      { title: 'Total Tasks', value: currentTasks.length, icon: ListTodo, color: 'text-blue-500' },
-      { title: 'Completed', value: completedTasks.length, icon: CheckCircle, color: 'text-green-500' },
-      { title: 'In Progress', value: inProgressTasks.length, icon: Clock, color: 'text-yellow-500' },
-      { title: 'Overdue', value: overdueTasks.length, icon: AlertTriangle, color: 'text-red-500' },
+      { title: 'Total de Tareas', value: currentTasks.length, icon: ListTodo, color: 'text-blue-500' },
+      { title: 'Completadas', value: completedTasks.length, icon: CheckCircle, color: 'text-green-500' },
+      { title: 'En Progreso', value: inProgressTasks.length, icon: Clock, color: 'text-yellow-500' },
+      { title: 'Vencidas', value: overdueTasks.length, icon: AlertTriangle, color: 'text-red-500' },
     ];
     const taskStatusDistribution = [
-      { name: 'Completed', value: completedTasks.length },
-      { name: 'In Progress', value: inProgressTasks.length },
-      { name: 'Overdue', value: overdueTasks.length },
+      { name: 'Completadas', value: completedTasks.length },
+      { name: 'En Progreso', value: inProgressTasks.length },
+      { name: 'Vencidas', value: overdueTasks.length },
     ].filter(item => item.value > 0); // Filter out zero-value items for a cleaner chart
     return { kpis, taskStatusDistribution };
   }, [tasksData?.data]);
@@ -73,8 +73,8 @@ export function ProjectDetailPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 lg:py-12">
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>Error fetching project data</AlertTitle>
-          <AlertDescription>{error instanceof Error ? error.message : "An unknown error occurred."}</AlertDescription>
+          <AlertTitle>Error al cargar los datos del proyecto</AlertTitle>
+          <AlertDescription>{error instanceof Error ? error.message : "Ocurrió un error desconocido."}</AlertDescription>
         </Alert>
       </div>
     );
@@ -98,13 +98,13 @@ export function ProjectDetailPage() {
         </div>
         <div className="grid gap-6 md:grid-cols-5">
           <div className="md:col-span-3">
-            <h2 className="text-2xl font-semibold tracking-tight mb-4">Tasks</h2>
+            <h2 className="text-2xl font-semibold tracking-tight mb-4">Tareas</h2>
             <DataTable columns={columns} data={tasks} />
           </div>
           <div className="md:col-span-2">
             <Card>
               <CardHeader>
-                <CardTitle>Task Status</CardTitle>
+                <CardTitle>Estado de las Tareas</CardTitle>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
