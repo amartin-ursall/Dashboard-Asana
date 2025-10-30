@@ -11,6 +11,7 @@ import {Card} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { chatService, formatTime, renderToolCall, generateSessionTitle, MODELS } from '../lib/chat';
+import { generateUUID } from '../lib/uuid';
 import type { ChatState, SessionInfo } from '../../worker/types';
 import { AppLayout } from '@/components/layout/AppLayout';
 
@@ -93,7 +94,7 @@ export function DemoPage() { // Don't touch this exporting, Its a named export
     
     // Immediately add user message to chat state for instant display
     const userMessage = {
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       role: 'user' as const,
       content: message,
       timestamp: Date.now()

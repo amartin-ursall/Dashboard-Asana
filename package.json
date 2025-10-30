@@ -4,12 +4,22 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 3000",
+    "dev": "vite --host 0.0.0.0 --port 3050",
     "build": "vite build",
     "lint": "eslint --cache -f json --quiet .",
     "preview": "bun run build && vite preview --host 0.0.0.0 --port ${PORT:-4173}",
     "deploy": "bun run build && wrangler deploy",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "start": "bash scripts/start.sh",
+    "start:dev": "bash scripts/start.sh dev",
+    "start:preview": "bash scripts/start.sh preview",
+    "start:prod": "bash scripts/start.sh prod",
+    "stop": "bash scripts/stop.sh",
+    "stop:force": "bash scripts/stop.sh --force",
+    "status": "bash scripts/status.sh",
+    "firewall:open": "bash scripts/firewall-setup.sh open",
+    "firewall:close": "bash scripts/firewall-setup.sh close",
+    "firewall:status": "bash scripts/firewall-setup.sh status"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250807.0",

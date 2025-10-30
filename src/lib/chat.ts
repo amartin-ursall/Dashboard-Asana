@@ -1,4 +1,5 @@
 import type { Message, ChatState, ToolCall, WeatherResult, MCPResult, ErrorResult, SessionInfo } from '../../worker/types';
+import { generateUUID } from './uuid';
 
 export interface ChatResponse {
   success: boolean;
@@ -17,7 +18,7 @@ class ChatService {
   private baseUrl: string;
 
   constructor() {
-    this.sessionId = crypto.randomUUID();
+    this.sessionId = generateUUID();
     this.baseUrl = `/api/chat/${this.sessionId}`;
   }
 
@@ -106,7 +107,7 @@ class ChatService {
   }
 
   newSession(): void {
-    this.sessionId = crypto.randomUUID();
+    this.sessionId = generateUUID();
     this.baseUrl = `/api/chat/${this.sessionId}`;
   }
 

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { chatService } from '@/lib/chat';
+import { generateUUID } from '@/lib/uuid';
 import type { ChatState } from '../../worker/types';
 import { ChatMessage } from '@/components/chat/ChatMessage';
 import { ChatInput } from '@/components/chat/ChatInput';
@@ -36,7 +37,7 @@ export function ChatPage() {
     const message = input.trim();
     setInput('');
     const userMessage = {
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       role: 'user' as const,
       content: message,
       timestamp: Date.now()

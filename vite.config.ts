@@ -105,6 +105,8 @@ export default ({ mode }: { mode: string }) => {
       devSourcemap: true,
     },
     server: {
+      port: 3050,
+      host: '0.0.0.0',
       allowedHosts: true,
     },
     resolve: {
